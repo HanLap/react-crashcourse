@@ -1,40 +1,303 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="dist/custom.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<h4>Variables</h4>
+				<section>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						var bad = "bad"; // never use this
+						
+						let good = "good"; // reassignable
+						good = "still good"; 
+
+						const better = "better"; // not reassignable
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>Types</h4>
+				<section>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const number1 = 5.5;
+						const number2 = 5;
+
+						const bool = true;
+
+						const str = "string";
+
+						const arr = [1, "a"];
+					</code></pre>
+				</section>
+
+				<section>
+					JavaScript variables do not enforce types;
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						let a = 1;
+
+						a = "2";
+
+						a = false;
+					</code></pre>
+				</section>
+
+				<section>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const obj = {
+							id: "123",
+							name: "abc",
+							anotherObj: {
+								arr: [1, 2, 3],
+							},
+						};
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>Control Structures</h4>
+				<section>
+
+					Comparison
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						if (a === b) { // always use === !!!
+							...
+						} else {
+							...
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<div><code class="language-ts">==</code> vs <code class="language-ts">===</code></div>
+					<img src="assets/js-fuckery.png" alt="" style="height: 50vh; margin-top: 0;">
+				</section>
+
+				<section>
+					for-loops
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const arr = [1, 2, 3];
+
+						for (let i = 0; i < arr.length; i++) { // old fashioned
+							consolge.log(arr[i]);
+						}
+
+						for (const element of arr) { // modern
+							console.log(element);
+						}
+
+						arr.forEach(element => console.log(element));
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>Functions</h4>
+
+				<section>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						function addStuff(a, b) {
+							return a + b;
+						}
+
+
+						const c = addStuff(1, 2);
+					</code></pre>
+				</section>
+
+				<section>
+					Functions as Variables
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const addStuff = function (a, b) {
+							return a + b;
+						};
+					</code></pre>
+					<pre data-id="code-animation" class="fragment"><code class="language-ts" data-trim data-line-numbers>
+						const addStuff = (a, b) => {
+							return a + b;
+						}
+					</code></pre>
+					<pre data-id="code-animation" class="fragment"><code class="language-ts" data-trim data-line-numbers>
+						const addStuff = (a, b) => a + b;
+					</code></pre>
+				</section>
+
+				<section>
+					Functions as Parameters
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers="|1-3|5,6|8">						
+						const arr = [1, 2, 3];
+
+						arr.forEach((a) => console.log(a));
+
+						const logThat = (a) => console.log(a);
+						arr.forEach(logThat);
+
+						arr.forEach(console.log);
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>Importing</h4>
+
+				<section>
+					<div class="file-header">hello-file.ts</div>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const hello = "hello world";
+
+						export hello;
+					</code></pre>
+
+					<div class="fragment">
+						<div class="file-header">main.ts</div>
+						<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+							import { hello } from "hello-file";
+
+							console.log(hello);
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<div class="file-header">hello-file.ts</div>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						export default "hello world";
+					</code></pre>
+
+					<div class="file-header">main.ts</div>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						import Whatever from "hello-file";
+
+						console.log(Whatever);
+					</code></pre>
+				</section>
+			</section>
+
+
+			<section>
+				<h4>Destructuring Declaration</h4>
+				<section>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const arr = [1 , 2];
+
+						const [a, b] = arr;
+
+						console.log(a + b);
+					</code></pre>
+					<pre class="fragment" data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const obj = {
+							a: 1,
+							b: 2
+						};
+
+						const {a, b} = obj;
+
+						console.log(a, b)
+					</code></pre>
+				</section>
+			</section>
+
+
+			<section>
+				<h4>Typescript</h4>
+				<section>
+					Type Annotations!
+					<pre class="fragment" data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const str: string = "hewwo";
+						const a: number = 1;
+						const bool: boolean = true;
+						const arr: number[] = [1, 2, 3];
+
+						let dontKnow: any;
+					</code></pre>
+				</section>
+
+				<section>
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const bool = true; // type-annotation optional
+
+
+						let bool: boolean; // type-annotation required
+						bool = true;
+					</code></pre>
+				</section>
+
+				<section>
+					Interfaces
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers="1-4|7-12">
+						interface Maschinenbefaehigung {
+							taktrate: number;
+							schrittId: string;
+						}
+
+
+						interface Maschine {
+							id: string?;
+							name: string;
+							ausfallWahrscheinlichkeit: number;
+							befaehigungen: Maschinenbefaehigung[];
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					Interfaces
+					<pre data-id="code-animation"><code class="language-ts" data-trim data-line-numbers>
+						const maschine: Maschine = {
+						  name: "bohrmaschine",
+							ausfallWahrscheinlichkeit: 0.5,
+							befaehigungen: [
+								{
+									taktrate: 120,
+									schrittId: "s122"
+								}
+							]
+						};
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<a href="/react-basics.html">react-basics</a>
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
